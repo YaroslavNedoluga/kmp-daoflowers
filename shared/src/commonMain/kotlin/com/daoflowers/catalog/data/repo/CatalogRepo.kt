@@ -1,4 +1,4 @@
-package com.daoflowers
+package com.daoflowers.catalog.data.repo
 
 import com.daoflowers.catalog.data.model.FlowerType
 import io.ktor.client.HttpClient
@@ -12,8 +12,12 @@ import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-class Greeting {
-    private val platform: Platform = getPlatform()
+interface CatalogRepo {
+    @Throws(Exception::class)
+    suspend fun flowerTypes(): List<FlowerType>
+}
+
+class CatalogRepoImpl : CatalogRepo {
 
     private val httpClient = HttpClient {
         install(ContentNegotiation) {
@@ -29,10 +33,11 @@ class Greeting {
         }
     }
 
-    @Throws(Exception::class)
-    suspend fun flowerTypes(): List<FlowerType> {
+    override suspend fun flowerTypes(): List<FlowerType> {
         return httpClient
             .get("https://testmobile.daoflowers.com:8443/catalog/flowers/types")
             .body()
     }
+
+
 }

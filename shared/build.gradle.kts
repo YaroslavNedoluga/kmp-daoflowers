@@ -24,6 +24,7 @@ kotlin {
     }
 
     val ktorVersion = "2.2.4"
+    val koin = "3.2.0"
 
     sourceSets {
         val commonMain by getting {
@@ -35,6 +36,9 @@ kotlin {
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 implementation("io.ktor:ktor-client-logging:$ktorVersion")
                 implementation("io.github.aakira:napier:2.6.1")
+                implementation("io.insert-koin:koin-core:${koin}")
+                implementation("io.insert-koin:koin-android:${koin}")
+                implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5")
             }
         }
         val commonTest by getting {

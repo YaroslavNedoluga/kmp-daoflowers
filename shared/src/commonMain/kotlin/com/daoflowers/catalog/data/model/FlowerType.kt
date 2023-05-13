@@ -1,4 +1,4 @@
-package com.daoflowers.catalog.data
+package com.daoflowers.catalog.data.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
