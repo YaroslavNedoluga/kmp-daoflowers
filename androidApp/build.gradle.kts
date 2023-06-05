@@ -45,7 +45,7 @@ dependencies {
     implementation(composeBom)
     androidTestImplementation(composeBom)
 
-    val lifecycle_version = "2.6.1"
+    val lifecycleVersion = "2.6.1"
 
     // Material Design 3
     implementation("androidx.compose.material3:material3")
@@ -61,19 +61,19 @@ dependencies {
     implementation("androidx.compose.material3:material3-window-size-class")
 
     // Integration with activities
-    implementation("androidx.activity:activity-compose:1.7.1")
+    implementation("androidx.activity:activity-compose:1.7.2")
     // Integration with ViewModels
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
 
     // Saved state module for ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
     implementation("io.coil-kt:coil-compose:2.3.0")
 
     // Koin for Android
-    implementation("io.insert-koin:koin-androidx-compose:3.2.0")
+    implementation("io.insert-koin:koin-androidx-compose:3.4.2")
 
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 }

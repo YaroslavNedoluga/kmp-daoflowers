@@ -2,15 +2,33 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-	let greet = Greeting().greet()
+
+    @StateObject var vm = ViewModel()
 
 	var body: some View {
-		Text(greet)
+        Text(vm.text)
 	}
 }
 
-struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		ContentView()
-	}
+extension ContentView {
+    
+    @MainActor
+    class ViewModel: ObservableObject {
+
+        private let getFlowerTypesUseCase = CatalogKoinModule().getFlowerTypesUseCase
+        
+        @Published var text = "Loading..."
+
+        init() {
+            Task {
+                do {
+                    let flowerTypes = try await getFlowerTypesUseCase.invoke()
+                    text = "\(flowerTypes.map { $0 })"
+                } catch {
+                    text = "Error"
+                }
+            }
+        }
+
+    }
 }

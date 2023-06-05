@@ -5,7 +5,7 @@ import com.daoflowers.catalog.data.repo.CatalogRepo
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
-class FlowerTypesUseCase constructor(
+class GetFlowerTypesUseCase constructor(
     private val repo: CatalogRepo
 ) {
     suspend operator fun invoke(): ImmutableList<FlowerType> {
