@@ -1,8 +1,12 @@
 package com.daoflowers.android.ui.theme
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-val light_primary = Color(0xFF005CBA)
+val light_primary = Color(0xFF2F80ED)
 val light_onPrimary = Color(0xFFFFFFFF)
 val light_primaryContainer = Color(0xFFD7E3FF)
 val light_onPrimaryContainer = Color(0xFF001B3F)
@@ -18,9 +22,9 @@ val light_error = Color(0xFFBA1A1A)
 val light_errorContainer = Color(0xFFFFDAD6)
 val light_onError = Color(0xFFFFFFFF)
 val light_onErrorContainer = Color(0xFF410002)
-val light_background = Color(0xFFFAFCFF)
+val light_background = Color(0xFFFFFFFF)
 val light_onBackground = Color(0xFF001F2A)
-val light_surface = Color(0xFFFAFCFF)
+val light_surface = Color(0xFFFFFFFF)
 val light_onSurface = Color(0xFF001F2A)
 val light_surfaceVariant = Color(0xFFE0E2EC)
 val light_onSurfaceVariant = Color(0xFF44474E)
@@ -66,5 +70,68 @@ val dark_scrim = Color(0xFF000000)
 
 val light_badge = Color(0xFFEDF4FB)
 val dark_badge = Color(0xFF334958)
+
 val light_badge_icon = Color(0xFF4F4F4F)
 val dark_badge_icon = Color(0xFFA8ADBD)
+
+class ColorsHelper(
+    val navigationBarColors: NavigationBarColors,
+) {
+    data class NavigationBarColors(
+        val containerColor: Color,
+        val contentColor: Color,
+        val selectedIconColor: Color,
+        val indicatorColor: Color,
+        val selectedTextColor: Color,
+        val unselectedIconColor: Color,
+        val unselectedTextColor: Color,
+    )
+}
+
+val DarkColorsHelper = ColorsHelper(
+    navigationBarColors = ColorsHelper.NavigationBarColors(
+        containerColor = Color.White,
+        contentColor = Color.Black,
+        indicatorColor = Color.Black,
+        selectedIconColor = light_primary,
+        selectedTextColor = Color.Black,
+        unselectedIconColor = Color(0xFF828282),
+        unselectedTextColor = Color(0xFF8F9090),
+    )
+)
+
+val LightColorsHelper = ColorsHelper(
+    navigationBarColors = ColorsHelper.NavigationBarColors(
+        containerColor = Color.White,
+        contentColor = Color.Black,
+        indicatorColor = Color.White,
+        selectedIconColor = light_primary,
+        selectedTextColor = Color.Black,
+        unselectedIconColor = Color(0xFF828282),
+        unselectedTextColor = Color(0xFF8F9090),
+    )
+)
+
+@Composable
+fun ProvideColorsHelper(
+    colorsHelper: ColorsHelper,
+    content: @Composable () -> Unit
+) {
+    val colorsSet = remember { colorsHelper }
+    CompositionLocalProvider(
+        localColorsHelper provides colorsSet,
+        content = content
+    )
+}
+
+private val localColorsHelper = staticCompositionLocalOf { LightColorsHelper }
+
+object ColorsProvider {
+    private val local: ColorsHelper
+        @Composable
+        get() = localColorsHelper.current
+
+    val navigationBarColors: ColorsHelper.NavigationBarColors
+        @Composable
+        get() = local.navigationBarColors
+}

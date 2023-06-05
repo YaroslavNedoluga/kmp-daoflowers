@@ -13,7 +13,6 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 
 // Material 3 color schemes
@@ -108,9 +107,17 @@ fun AppTheme(
         }
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = replyTypography,
-        content = content
-    )
+    val colorsHelper = if (colorScheme == lightColorScheme) {
+        LightColorsHelper
+    } else {
+        DarkColorsHelper
+    }
+
+    ProvideColorsHelper(colorsHelper = colorsHelper) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = replyTypography,
+            content = content
+        )
+    }
 }
