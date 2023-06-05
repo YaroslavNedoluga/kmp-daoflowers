@@ -1,7 +1,7 @@
 package com.daoflowers.navigation.domain.model
 
-sealed interface BottomNavItem {
-    object Main : BottomNavItem
-    object Contacts : BottomNavItem
-    object Menu : BottomNavItem
+enum class BottomNavItem(val id: Int) {
+    Main(1),
+    Contacts(2),
+    Menu(3)
 }

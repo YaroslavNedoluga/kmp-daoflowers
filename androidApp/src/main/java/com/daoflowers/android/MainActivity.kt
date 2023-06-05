@@ -12,7 +12,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
@@ -39,8 +38,6 @@ import com.daoflowers.android.ui.catalog.flower.FlowerTypesScreen
 import com.daoflowers.android.ui.navigation.model.BottomItemUI
 import com.daoflowers.android.ui.navigation.model.toRoute
 import com.daoflowers.android.ui.theme.AppTheme
-import com.daoflowers.android.ui.theme.ColorsHelper
-import com.daoflowers.android.ui.theme.ColorsProvider
 import com.daoflowers.android.ui.theme.ColorsProvider.navigationBarColors
 import com.daoflowers.navigation.domain.model.BottomNavItem
 import kotlinx.collections.immutable.ImmutableList
