@@ -1,12 +1,13 @@
 package com.daoflowers.android.ui.navigation.model
 
-import com.daoflowers.android.R
 import com.daoflowers.navigation.domain.model.BottomNavItem
+import com.daoflowers.sharing_resources.SharedRes
+import dev.icerock.moko.resources.StringResource
 
 data class BottomItemUI(
     val id: BottomNavItem,
     val route: String,
-    val title: Int,
+    val title: StringResource,
     val icon: Int
 )
 
@@ -21,17 +22,17 @@ fun BottomNavItem.toBottomItemUI(): BottomItemUI {
 
 fun BottomNavItem.toNavIcon(): Int {
     return when (this) {
-        BottomNavItem.Main -> R.drawable.ic_home
-        BottomNavItem.Contacts -> R.drawable.ic_users
-        BottomNavItem.Menu -> R.drawable.ic_menu
+        BottomNavItem.Main -> SharedRes.images.Home.drawableResId
+        BottomNavItem.Contacts -> SharedRes.images.Contacts.drawableResId
+        BottomNavItem.Menu -> SharedRes.images.Category.drawableResId
     }
 }
 
-fun BottomNavItem.toNavString(): Int {
+fun BottomNavItem.toNavString(): StringResource {
     return when (this) {
-        BottomNavItem.Main -> R.string.main
-        BottomNavItem.Contacts -> R.string.contacts
-        BottomNavItem.Menu -> R.string.menu
+        BottomNavItem.Main -> SharedRes.strings.main
+        BottomNavItem.Contacts -> SharedRes.strings.contacts
+        BottomNavItem.Menu -> SharedRes.strings.menu
     }
 }
 

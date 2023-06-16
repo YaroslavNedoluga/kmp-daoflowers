@@ -1,7 +1,8 @@
 plugins {
     kotlin("multiplatform")
-    id("com.android.library")
     kotlin("plugin.serialization") version "1.8.21"
+    id("com.android.library")
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 kotlin {
@@ -20,6 +21,8 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
+            export("dev.icerock.moko:resources:0.22.3")
+            export("dev.icerock.moko:graphics:0.9.0")
         }
     }
 
@@ -38,6 +41,7 @@ kotlin {
                 implementation("io.github.aakira:napier:2.6.1")
                 implementation("io.insert-koin:koin-core:${koin}")
                 implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5")
+                api("dev.icerock.moko:resources:0.22.3")
             }
         }
         val commonTest by getting {
@@ -84,4 +88,10 @@ android {
     defaultConfig {
         minSdk = 26
     }
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "com.daoflowers.sharing_resources"
+    multiplatformResourcesClassName = "SharedRes"
+    disableStaticFrameworkWarning = true
 }

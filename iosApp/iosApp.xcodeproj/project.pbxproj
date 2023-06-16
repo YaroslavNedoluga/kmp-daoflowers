@@ -12,6 +12,7 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* MainContentView.swift */; };
 		CEAC79C22A2DDFEE0014F347 /* BottomNavItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC79C12A2DDFEE0014F347 /* BottomNavItem.swift */; };
+		CEBBA3192A3C356C00E52A06 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBA3182A3C356C00E52A06 /* Image.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,7 @@
 		7555FF82242A565900829871 /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEAC79C12A2DDFEE0014F347 /* BottomNavItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavItem.swift; sourceTree = "<group>"; };
+		CEBBA3182A3C356C00E52A06 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 		CEAC79BD2A2D01BB0014F347 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				CEBBA3172A3C356200E52A06 /* res */,
 				CEAC79C02A2DDFDA0014F347 /* navigation */,
 				CEAC79B22A2CDC460014F347 /* catalog */,
 			);
@@ -147,6 +150,14 @@
 				CEAC79C12A2DDFEE0014F347 /* BottomNavItem.swift */,
 			);
 			path = navigation;
+			sourceTree = "<group>";
+		};
+		CEBBA3172A3C356200E52A06 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				CEBBA3182A3C356C00E52A06 /* Image.swift */,
+			);
+			path = res;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +255,7 @@
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* MainContentView.swift in Sources */,
 				CEAC79C22A2DDFEE0014F347 /* BottomNavItem.swift in Sources */,
+				CEBBA3192A3C356C00E52A06 /* Image.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

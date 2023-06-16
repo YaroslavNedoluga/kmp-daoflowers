@@ -30,7 +30,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.capitalize
@@ -44,9 +43,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.daoflowers.android.R
+import com.daoflowers.android.ui.res.stringResource
 import com.daoflowers.android.ui.theme.light_badge
 import com.daoflowers.android.ui.theme.light_badge_icon
 import com.daoflowers.catalog.data.model.FlowerType
+import com.daoflowers.sharing_resources.SharedRes
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -143,7 +144,7 @@ private fun FlowerTypeCard(
                         width = 80.dp,
                         height = 16.dp
                     ),
-                    text = stringResource(id = R.string.count_sorts, flowerType.sortsCount ?: 0),
+                    text = stringResource(id = SharedRes.strings.count_sorts, flowerType.sortsCount ?: 0),
                     iconId = R.drawable.ic_flower,
                     iconStart = true
                 )

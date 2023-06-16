@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Buttons nav items-->
+    <string name="main">Principal</string>
+    <string name="contacts">Contactos</string>
+    <string name="menu">Menú</string>
+
+    <string name="count_sorts">%d ordenamientos</string>
+
+</resources>

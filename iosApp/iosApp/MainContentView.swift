@@ -8,24 +8,23 @@ struct MainContentView: View {
 	var body: some View {
         TabView {
             ForEach(vm.tabs, id: \.id) { item in
-    
                 if item.id == BottomNavItem.main.id {
                     FlowerTypesScreen()
                         .tabItem {
-                            Image(systemName: "Home")
-                            Text("Home")
+                            Image(resource: \.Home)
+                            Text(Strings().get(id: SharedRes.strings().main, args: []))
                         }
                 } else if item.id == BottomNavItem.contacts.id {
                     ContactsScreen()
                         .tabItem {
-                            Image(systemName: "Contacts")
-                            Text("Contacts")
+                            Image(resource: \.Contacts)
+                            Text(Strings().get(id: SharedRes.strings().contacts, args: []))
                         }
                 } else if item.id == BottomNavItem.menu.id {
                     MenuScreen()
                         .tabItem {
-                            Image(systemName: "Menu")
-                            Text("Menu")
+                            Image(resource: \.Category)
+                            Text(Strings().get(id: SharedRes.strings().menu, args: []))
                         }
                 } else {
                     Text("Unsupported tab for id")
