@@ -20,9 +20,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -33,12 +34,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.daoflowers.android.ui.catalog.flower.FlowerTypesScreen
+import com.daoflowers.android.ui.common.SingleLineText
+import com.daoflowers.android.ui.common.TextStyles.InterTextStyle
 import com.daoflowers.android.ui.navigation.model.BottomItemUI
 import com.daoflowers.android.ui.navigation.model.toRoute
 import com.daoflowers.android.ui.res.stringResource
+import com.daoflowers.android.ui.res.toColor
 import com.daoflowers.android.ui.theme.AppTheme
 import com.daoflowers.android.ui.theme.ColorsProvider.navigationBarColors
 import com.daoflowers.navigation.domain.model.BottomNavItem
+import com.daoflowers.sharing_resources.SharedRes
 import kotlinx.collections.immutable.ImmutableList
 import org.koin.androidx.compose.koinViewModel
 
@@ -83,8 +88,8 @@ fun BottomBar(
     val currentRoute = navBackStackEntry?.destination?.route
 
     NavigationBar(
-        containerColor = MaterialTheme.colorScheme.surface,
-        contentColor = MaterialTheme.colorScheme.onSurface,
+        containerColor = SharedRes.colors.NavigationBar_ContainerColor.toColor(),
+        contentColor = SharedRes.colors.NavigationBar_ContentColor.toColor(),
         tonalElevation = 0.dp,
     ) {
         items.forEach { item ->
@@ -97,11 +102,9 @@ fun BottomBar(
                     )
                 },
                 label = {
-                    Text(
+                    SingleLineText(
                         text = stringResource(id = item.title),
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.labelSmall.copy(
+                        style = InterTextStyle.copy(
                             fontWeight = FontWeight.Normal,
                             fontSize = 10.sp
                         )
@@ -109,11 +112,11 @@ fun BottomBar(
                 },
                 selected = currentRoute == item.route,
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = navigationBarColors.selectedIconColor,
-                    selectedTextColor = navigationBarColors.selectedTextColor,
-                    indicatorColor = Color.White,
-                    unselectedIconColor = navigationBarColors.unselectedIconColor,
-                    unselectedTextColor = navigationBarColors.unselectedTextColor,
+                    selectedIconColor = SharedRes.colors.NavigationBar_SelectedIconColor.toColor(),
+                    selectedTextColor = SharedRes.colors.NavigationBar_SelectedTextColor.toColor(),
+                    indicatorColor = SharedRes.colors.NavigationBar_IndicatorColor.toColor(),
+                    unselectedIconColor = SharedRes.colors.NavigationBar_UnselectedIconColor.toColor(),
+                    unselectedTextColor = SharedRes.colors.NavigationBar_UnselectedTextColor.toColor(),
                 ),
                 onClick = {
                     navController.navigate(item.route) {

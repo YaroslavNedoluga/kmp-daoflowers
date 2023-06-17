@@ -1,13 +1,12 @@
 package com.daoflowers.android.ui.catalog.flower
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -30,22 +29,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.PlatformTextStyle
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.daoflowers.android.R
+import com.daoflowers.android.ui.common.HeaderScreenText
+import com.daoflowers.android.ui.common.SingleLineText
+import com.daoflowers.android.ui.common.TextStyles.GilroyTextStyle
+import com.daoflowers.android.ui.common.TextStyles.InterTextStyle
 import com.daoflowers.android.ui.res.stringResource
-import com.daoflowers.android.ui.theme.light_badge
-import com.daoflowers.android.ui.theme.light_badge_icon
+import com.daoflowers.android.ui.res.toColor
 import com.daoflowers.catalog.data.model.FlowerType
 import com.daoflowers.sharing_resources.SharedRes
 import org.koin.androidx.compose.koinViewModel
@@ -63,14 +62,23 @@ fun FlowerTypesScreen(
 private fun FlowerTypeScreenContent(
     state: FlowerTypesViewModel.State,
 ) {
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
+        HeaderScreenText(
+            modifier = Modifier.padding(
+                start = 24.dp,
+                top = 24.dp,
+                end = 24.dp,
+            ),
+            text = stringResource(SharedRes.strings.flower_catalog)
+        )
+
         LazyVerticalGrid(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(25.dp),
+            contentPadding = PaddingValues(24.dp),
             columns = GridCells.Adaptive(145.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp),
             horizontalArrangement = Arrangement.spacedBy(20.dp),
@@ -93,7 +101,11 @@ private fun FlowerTypeCard(
     onClick: (FlowerType) -> Unit
 ) {
     Surface(
-        modifier = Modifier.height(160.dp),
+        modifier = Modifier
+            .height(160.dp)
+            .clickable(onClick = { onClick(flowerType) }),
+        color = SharedRes.colors.Card_Surface_ContainerColor.toColor(),
+        contentColor = SharedRes.colors.Card_Surface_ContentColor.toColor(),
         shape = CardDefaults.shape,
         shadowElevation = 6.dp,
     ) {
@@ -112,20 +124,15 @@ private fun FlowerTypeCard(
                 contentScale = ContentScale.Crop
             )
 
-            Text(
+            SingleLineText(
                 modifier = Modifier
                     .padding(4.dp)
                     .fillMaxWidth(),
                 text = flowerType.name.capitalize(Locale.current),
                 textAlign = TextAlign.Start,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = TextStyle(
+                style = GilroyTextStyle.copy(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    platformStyle = PlatformTextStyle(
-                        includeFontPadding = false
-                    )
                 )
             )
 
@@ -144,8 +151,11 @@ private fun FlowerTypeCard(
                         width = 80.dp,
                         height = 16.dp
                     ),
-                    text = stringResource(id = SharedRes.strings.count_sorts, flowerType.sortsCount ?: 0),
-                    iconId = R.drawable.ic_flower,
+                    text = stringResource(
+                        id = SharedRes.strings.count_sorts,
+                        flowerType.sortsCount ?: 0
+                    ),
+                    iconId = SharedRes.images.Flower.drawableResId,
                     iconStart = true
                 )
 
@@ -157,7 +167,7 @@ private fun FlowerTypeCard(
                         height = 16.dp
                     ),
                     text = (flowerType.imagesCount ?: 0).toString(),
-                    iconId = R.drawable.ic_photo,
+                    iconId = SharedRes.images.Photo.drawableResId,
                     iconStart = false
                 )
             }
@@ -175,7 +185,7 @@ fun CardBadge(
     Row(
         modifier = modifier
             .background(
-                color = light_badge,
+                color = SharedRes.colors.Catalog_Flower_BadgeBackground.toColor(),
                 shape = RoundedCornerShape(8.dp)
             )
             .padding(horizontal = 4.dp),
@@ -188,21 +198,16 @@ fun CardBadge(
                 modifier = Modifier.size(10.dp),
                 painter = painterResource(id = iconId),
                 contentDescription = null,
-                tint = light_badge_icon
+                tint = SharedRes.colors.Catalog_Flower_BadgeContent.toColor()
             )
             Spacer(modifier = Modifier.width(4.dp))
         }
 
         Text(
-            modifier = Modifier.fillMaxHeight(),
             text = text,
-            color = light_badge_icon,
+            color = SharedRes.colors.Catalog_Flower_BadgeContent.toColor(),
             fontSize = 10.sp,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.labelSmall.copy(
-                fontWeight = FontWeight.Normal
-            )
+            style = InterTextStyle
         )
 
         if (!iconStart) {
@@ -212,7 +217,7 @@ fun CardBadge(
                 modifier = Modifier.size(10.dp),
                 painter = painterResource(id = iconId),
                 contentDescription = null,
-                tint = light_badge_icon
+                tint = SharedRes.colors.Catalog_Flower_BadgeContent.toColor()
             )
         }
     }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--NavigationBarColors-->
+    <color name="NavigationBar_ContainerColor">
+        <light>#FFFFFF</light>
+        <dark>#001F2A</dark>
+    </color>
+    <color name="NavigationBar_ContentColor">
+        <light>#1D1D1F</light>
+        <dark>#BFE9FF</dark>
+    </color>
+    <color name="NavigationBar_SelectedIconColor">
+        <light>#2F80ED</light>
+        <dark>#FFFFFF</dark>
+    </color>
+    <color name="NavigationBar_SelectedTextColor">
+        <light>#313333</light>
+        <dark>#FFFFFF</dark>
+    </color>
+    <color name="NavigationBar_UnselectedIconColor">
+        <light>#828282</light>
+        <dark>#BFE9FF</dark>
+    </color>
+    <color name="NavigationBar_UnselectedTextColor">
+        <light>#828282</light>
+        <dark>#BFE9FF</dark>
+    </color>
+    <color name="NavigationBar_IndicatorColor">
+        <light>#FFFFFF</light>
+        <dark>#001F2A</dark>
+    </color>
+
+    <!--CardsColors-->
+    <color name="Card_Surface_ContainerColor">
+        <light>#FFFFFF</light>
+        <dark>#2A3C48</dark>
+    </color>
+    <color name="Card_Surface_ContentColor">
+        <light>#1D1D1F</light>
+        <dark>#F8F8F8</dark>
+    </color>
+
+    <!--Catalog Colors-->
+    <color name="Catalog_Flower_BadgeBackground">
+        <light>#F8F9FB</light>
+        <dark>#334958</dark>
+    </color>
+    <color name="Catalog_Flower_BadgeContent">
+        <light>#4F4F4F</light>
+        <dark>#A8ADBD</dark>
+    </color>
+
+</resources>
