@@ -9,7 +9,7 @@ struct MainContentView: View {
         TabView {
             ForEach(vm.tabs, id: \.id) { item in
                 if item.id == BottomNavItem.main.id {
-                    FlowerTypesScreen()
+                    FlowerTypesView()
                         .tabItem {
                             Image(resource: \.Home)
                             Text(Strings().get(id: SharedRes.strings().main, args: []))
@@ -54,12 +54,6 @@ extension MainContentView {
             }
         }
 
-    }
-}
-
-struct FlowerTypesScreen: View {
-    var body: some View {
-        Text("Flower Types")
     }
 }
 
