@@ -50,4 +50,30 @@
         <dark>#A8ADBD</dark>
     </color>
 
+    <!-- Search -->
+    <color name="Catalog_Search_Placeholder">
+        <light>#828282</light>
+        <dark>#BFE9FF</dark>
+    </color>
+    <color name="Catalog_Search_Icon">
+        <light>#74777F</light>
+        <dark>#BFE9FF</dark>
+    </color>
+    <color name="Catalog_Search_Text">
+        <light>#1D1D1F</light>
+        <dark>#FFFFFF</dark>
+    </color>
+    <color name="Catalog_Search_Container">
+        <light>#EDF4FB</light>
+        <dark>#2A3C48</dark>
+    </color>
+    <color name="Catalog_Search_Cursor">
+        <light>#828282</light>
+        <dark>#828282</dark>
+    </color>
+    <color name="Catalog_Search_RowIcon">
+        <light>#BDBDBD</light>
+        <dark>#BDBDBD</dark>
+    </color>
+
 </resources>

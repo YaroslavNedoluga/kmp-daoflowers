@@ -1,8 +1,11 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.daoflowers.android.ui.catalog.flower
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -18,6 +21,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -39,13 +43,17 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.daoflowers.android.R
+import com.daoflowers.android.ui.catalog.flower.FlowerTypesViewModel.SideEffect
+import com.daoflowers.android.ui.catalog.flower.FlowerTypesViewModel.SideEffect.ShowFlowerSorts
+import com.daoflowers.android.ui.catalog.flower.FlowerTypesViewModel.State
+import com.daoflowers.android.ui.catalog.flower.search.FlowerSearchComponent
 import com.daoflowers.android.ui.common.HeaderScreenText
 import com.daoflowers.android.ui.common.SingleLineText
 import com.daoflowers.android.ui.common.TextStyles.GilroyTextStyle
 import com.daoflowers.android.ui.common.TextStyles.InterTextStyle
 import com.daoflowers.android.ui.res.stringResource
 import com.daoflowers.android.ui.res.toColor
-import com.daoflowers.catalog.data.model.FlowerType
+import com.daoflowers.catalog.ui.flower.FlowerTypeItem
 import com.daoflowers.sharing_resources.SharedRes
 import org.koin.androidx.compose.koinViewModel
 
@@ -55,12 +63,17 @@ fun FlowerTypesScreen(
     viewModel: FlowerTypesViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    FlowerTypeScreenContent(state = state)
+    val onSideEffect = viewModel::onSideEffect
+    FlowerTypeScreenContent(
+        state = state,
+        onSideEffect = onSideEffect
+    )
 }
 
 @Composable
 private fun FlowerTypeScreenContent(
-    state: FlowerTypesViewModel.State,
+    state: State,
+    onSideEffect: (SideEffect) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -76,29 +89,44 @@ private fun FlowerTypeScreenContent(
             text = stringResource(SharedRes.strings.flower_catalog)
         )
 
-        LazyVerticalGrid(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(24.dp),
-            columns = GridCells.Adaptive(145.dp),
-            verticalArrangement = Arrangement.spacedBy(20.dp),
-            horizontalArrangement = Arrangement.spacedBy(20.dp),
+        Box(
+            modifier = Modifier
+                .padding(top = 24.dp)
+                .fillMaxWidth()
         ) {
-            items(state.flowerTypes) {
-                FlowerTypeCard(
-                    flowerType = it,
-                    onClick = { _ ->
-
-                    }
-                )
+            LazyVerticalGrid(
+                modifier = Modifier
+                    .padding(top = 48.dp)
+                    .fillMaxSize(),
+                contentPadding = PaddingValues(24.dp),
+                columns = GridCells.Adaptive(145.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp),
+                horizontalArrangement = Arrangement.spacedBy(20.dp),
+            ) {
+                items(state.flowerTypes) { flowerType ->
+                    FlowerTypeCard(
+                        flowerType = flowerType,
+                        onClick = { onSideEffect(ShowFlowerSorts(flowerType)) }
+                    )
+                }
             }
+
+            FlowerSearchComponent(
+                modifier = Modifier
+                    .padding(
+                        start = 24.dp,
+                        end = 24.dp,
+                    )
+                    .fillMaxWidth(),
+            )
         }
     }
 }
 
 @Composable
 private fun FlowerTypeCard(
-    flowerType: FlowerType,
-    onClick: (FlowerType) -> Unit
+    flowerType: FlowerTypeItem,
+    onClick: (FlowerTypeItem) -> Unit
 ) {
     Surface(
         modifier = Modifier
@@ -153,7 +181,7 @@ private fun FlowerTypeCard(
                     ),
                     text = stringResource(
                         id = SharedRes.strings.count_sorts,
-                        flowerType.sortsCount ?: 0
+                        flowerType.sortsCount
                     ),
                     iconId = SharedRes.images.Flower.drawableResId,
                     iconStart = true
@@ -166,7 +194,7 @@ private fun FlowerTypeCard(
                         width = 48.dp,
                         height = 16.dp
                     ),
-                    text = (flowerType.imagesCount ?: 0).toString(),
+                    text = flowerType.imagesCount.toString(),
                     iconId = SharedRes.images.Photo.drawableResId,
                     iconStart = false
                 )

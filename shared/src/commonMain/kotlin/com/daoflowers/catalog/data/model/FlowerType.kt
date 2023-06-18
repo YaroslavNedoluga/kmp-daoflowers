@@ -8,7 +8,7 @@ data class FlowerType(
     @SerialName("id")
     val id: Int,
     @SerialName("isGroup")
-    val isGroup: Boolean,
+    val isGroup: Boolean? = null,
     @SerialName("flowerTypeGroupId")
     val groupId: Int? = null,
     @SerialName("name")
